@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>GitHub Copilot Quiz</title>
+            <!-- Link to the CSS file and icons -->
+            <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        </head>
+        <body>
+            <!-- Navigation Bar -->
+        <div id="navbar"></div>
+            <script>
+                fetch('navbar.html')
+                    .then(response => response.text())
+                    .then(data => document.getElementById('navbar').innerHTML = data);
+            </script>
+            <!-- End of Navigation Bar -->
+
+            <!-- Quiz Form -->
+                <h1 class="main-content">GitHub Copilot Quiz</h1>
+                <p id="quiz-timer" aria-live="polite"></p>
+                <form action="/submit-path" method="GET" id="quiz-form">
+                    <!-- Fill-in-the-Blank Questions -->
+                        <p>Question 1: What is GitHub Copilot?</p>
+                            <textarea name="q1" required></textarea>
+                        <p>Question 2: Which company or companies developed GitHub Copilot?</p>
+                            <textarea name="q2"></textarea>
+                    <!-- Multiple Choice Questions -->
+                        <p>Question 3: Who owns GitHub?</p>
+                            <input type="radio" id="q3a" name="q3" value="a" required>
+                            <label for="q3a">Google</label><br>
+                            <input type="radio" id="q3b" name="q3" value="b" required>
+                            <label for="q3b">Amazon</label><br>
+                            <input type="radio" id="q3c" name="q3" value="c" required>
+                            <label for="q3c">Microsoft</label><br>
+                            <input type="radio" id="q3d" name="q3" value="d" required>
+                            <label for="q3d">Meta</label><br>
+                        <p>Question 4: How exactly does GitHub Copilot HELP developers?</p>
+                            <input type="radio" id="q4a" name="q4" value="a" required>
+                            <label for="q4a">Doing the coding so the developer doesn't have to</label><br>
+                            <input type="radio" id="q4b" name="q4" value="b" required>
+                            <label for="q4b">Doing online research</label><br>
+                            <input type="radio" id="q4c" name="q4" value="c" required>
+                            <label for="q4c">Talks to you about current events</label><br>
+                            <input type="radio" id="q4d" name="q4" value="d" required>
+                            <label for="q4d">Editing/generating code and making suggestions/predictions based on code and user's inputs</label><br>
+                        <p>Question 5: What is an example of academic dishonesty?</p>
+                            <input type="radio" id="q5a" name="q5" value="a" required>
+                            <label for="q5a">Working on a group project with your group</label><br>
+                            <input type="radio" id="q5b" name="q5" value="b" required>
+                            <label for="q5b">Cheating on a test</label><br>
+                            <input type="radio" id="q5c" name="q5" value="c" required>
+                            <label for="q5c">Doing research to help you complete an assignment</label><br>
+                            <input type="radio" id="q5d" name="q5" value="d" required>
+                            <label for="q5d">All of the above</label><br>
+                    <!-- Multi-Selection Question -->
+                        <p>Question 6: What are some potential concerns when it comes to using GitHub Copilot in academic environments?</p>
+                            <input type="checkbox" id="q6a" name="q6" value="a">
+                            <label for="q6a">It may encourage academic dishonesty</label><br>
+                            <input type="checkbox" id="q6b" name="q6" value="b">
+                            <label for="q6b">It will help the student learn more efficiently</label><br>
+                            <input type="checkbox" id="q6c" name="q6" value="c">
+                            <label for="q6c">It will improve the student's coding skills</label><br>
+                            <input type="checkbox" id="q6d" name="q6" value="d">
+                            <label for="q6d">It may hinder the development of the student's coding skills</label><br>
+                    <button type="submit">Submit Answers</button>
+                </form>
+                <!-- End of Quiz Form -->
+
+                <!-- Quiz Results -->
+                <div id="quiz-results"></div>
+
+                <!-- Javascript for Quiz Form to display results -->
+                <script>
+                    const timeLimit = 10 * 60;
+                    let timeLeft = timeLimit;
+                    const quizForm = document.getElementById('quiz-form');
+                    const quizTimer = document.getElementById('quiz-timer');
+                    const quizResults = document.getElementById('quiz-results');
+
+                    // Quiz timer
+                    function showTime() {
+                        const minutes = Math.floor(timeLeft / 60);
+                        const seconds = String(timeLeft % 60).padStart(2, '0');
+                        quizTimer.textContent = `Time remaining: ${minutes}:${seconds}`;
+                    }
+
+                    showTime();
+                    const timer = setInterval(function() {
+                        timeLeft--;
+                        showTime();
+                        if (timeLeft === 0) finishQuiz(true);
+                    }, 1000);
+
+                    // Making sure that capitalization and trailing whitespace don't affect quiz results
+                    function normalize(value) {
+                        return String(value ?? '').trim().toLowerCase();
+                    }
+
+                    // Grade the quiz whether the timer expires or the user presses submit
+                    function finishQuiz(timeExpired) {
+                        clearInterval(timer);
+                        quizForm.hidden = true;
+
+                        const formData = new FormData(quizForm);
+                        let score = 0;
+
+                        // Correct quiz answers
+                        const correctAnswers = {
+                            q1: ["An AI tool that can assist developers", "AI development tool", "AI programming tool", "AI code assistant", "AI code generator", "AI code editor"],
+                            q2: ["github", "openai", "github and openai", "openai and github", "github & openai", "openai & github", "github + openai", "openai + github", "github/openai", "openai/github", "github, openai", "openai, github", "github; openai", "openai; github"],
+                            q3: "c",
+                            q4: "d",
+                            q5: "b",
+                            q6: ["a", "d"]
+                        };
+
+                        // Scoring mechanism for the entire quiz
+                        for (const [question, answer] of Object.entries(correctAnswers)) {
+                            if (question === 'q6') {
+                                const selected = formData.getAll(question).map(normalize);
+                                // The checkbox response is correct only when all the right choices are chosen
+                                score += selected.length === answer.length && answer.every(value => selected.includes(value)) ? 1 : 0;
+                            } else if (Array.isArray(answer)) {
+                                const response = normalize(formData.get(question));
+                                score += response && answer.map(normalize).includes(response) ? 1 : 0;
+                            } else {
+                                score += normalize(formData.get(question)) === normalize(answer) ? 1 : 0;
+                            }
+                        }
+
+                        // Calculating quiz results
+                        const totalQuestions = Object.keys(correctAnswers).length;
+                        const percentage = Math.round(score / totalQuestions * 100);
+                        const passed = score / totalQuestions >= 0.7;
+                        const elapsed = timeLimit - timeLeft;
+                        const elapsedTime = `${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, '0')}`;
+
+                        // Displaying quiz results
+                        quizResults.className = passed ? 'quiz-result-pass' : 'quiz-result-fail';
+                        quizResults.innerHTML = `
+                            <h2>${passed ? 'Passed!' : 'Failed'}</h2>
+                            <p>You got ${score} out of ${totalQuestions} (${percentage}%).</p>
+                            <p>Time spent: ${elapsedTime}${timeExpired ? ' (time limit reached)' : ''}</p>
+                            <button type="button" onclick="location.reload()">Retake Quiz</button>
+                        `;
+                    }
+
+
+                    // Stop the page from reloading so that results can be shown on this page instead of a new one
+                    quizForm.addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        finishQuiz(false);
+                    });
+                </script>
+        </body>
+        <footer>
+            <p>This website is a class project, and <a href="https://ksuweb.github.io/IT3203/">this is the link to the class website</a>.</p>
+        </footer>
+    </html>

@@ -9,30 +9,15 @@
         </head>
         <body>
             <!-- Navigation Bar -->
-            <nav>
-                <ul id="main-menu">
-                    <li><a href="index.html">Home</a></li>
-                    
-                    <!-- Topics Dropdown Menu -->
-                    <li id="dropdown">
-                        <a href="#">Topics <i class="fas fa-caret-down" aria-hidden="true"></i></a>
-                        <ul id="dropdown-content">
-                            <li><a href="cookies.html">Cookies</a></li>
-                            <li><a href="copilot.html">Copilot</a></li>
-                        </ul>
-                    </li>
-                    <!-- End of Topics Dropdown Menu -->
-
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="concepts.html">Concepts</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </nav>
+        <div id="navbar"></div>
+            <script>
+                fetch('navbar.html')
+                    .then(response => response.text())
+                    .then(data => document.getElementById('navbar').innerHTML = data);
+            </script>
             <!-- End of Navigation Bar -->
-            <main id="main-content">
-                <h1>About the Owner</h1>
-                <p id="about-description">Hi! I'm Anthony Ojeda, and this website is a project for my Intro to Web Dev class. This website will talk about GitHub Copilot, how it's used for programming, why some people like it, and why others might not like the idea of it so much. I hope you enjoy reading the content and using the website!</p>
-            </main>
+                <h1 class="main-content">About the Owner</h1>
+                <p class="main-content">Hello! I'm Anthony Ojeda, and this website is a project for my Intro to Web Development class. This website will talk about GitHub Copilot, how it's used for programming, and its controversies. I hope you enjoy reading the content and using the website!</p>
         </body>
         <footer>
             <p>This website is a class project, and <a href="https://ksuweb.github.io/IT3203/">this is the link to the class website</a>.</p>

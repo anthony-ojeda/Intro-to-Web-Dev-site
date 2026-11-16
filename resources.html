@@ -7,35 +7,43 @@
             <link rel="stylesheet" href="style.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         </head>
-        <body>
-            <!-- Navigation Bar -->
-            <nav>
-                <ul id="main-menu">
-                    <li><a href="index.html">Home</a></li>
-                    
-                    <!-- Topics Dropdown Menu -->
-                    <li id="dropdown">
-                        <a href="#">Topics <i class="fas fa-caret-down" aria-hidden="true"></i></a>
-                        <ul id="dropdown-content">
-                            <li><a href="overview.html">Overview</a></li>
-                            <li><a href="controversies.html">Controversies</a></li>
-                        </ul>
-                    </li>
-                    <!-- End of Topics Dropdown Menu -->
+    <body>
+        <!-- Navigation Bar -->
+        <div id="navbar"></div>
+        <script>
+            fetch('navbar.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('navbar').innerHTML = data);
+        </script>
+        <!-- End of Navigation Bar -->
 
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="concepts.html">Concepts</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </nav>
-            <!-- End of Navigation Bar -->
-            <h1>Resources & References</h1>
-            <ul>
-                <li>Resource 1</li>
-                <li>Resource 2</li>
-            </ul>
-        </body>
+        <!-- Table for Resources -->
+        <table class="main-content">
+            <caption>Resources & References</caption>
+            <thead>
+                <tr>
+                    <th>Resource</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="https://docs.github.com/en/copilot/get-started/about-github-copilot" target="_blank">GitHub Docs - Copilot Overview</a></td>
+                    <td>The official GitHub Copilot documentation on GitHub Docs</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/orgs/community/discussions/162634" target="_blank">GitHub Community discussion #162634</a></td>
+                    <td>A 2025 discussion on GitHub about just how unreliable Copilot can be</td>
+                </tr>
+                <tr>
+                    <td><a href="https://cdn.ca9.uscourts.gov/datastore/opinions/2026/09/16/24-7700.pdf" target="_blank">Doe v. GitHub, Inc</a> and <a href="https://web.archive.org/web/20221103204107/https://githubcopilotlitigation.com/pdf/1-0-github_complaint.pdf" target="_blank">GitHub Copilot litigation</a></td>
+                    <td>Both of these legal cases deal with concerns about whether the data GitHub Copilot is trained on is fair use or copyright infringement</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- End of Resources Table -->
         <footer>
             <p>This website is a class project, and <a href="https://ksuweb.github.io/IT3203/">this is the link to the class website</a>.</p>
         </footer>
+    </body>
     </html>

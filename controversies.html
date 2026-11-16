@@ -9,28 +9,17 @@
         </head>
         <body>
             <!-- Navigation Bar -->
-            <nav>
-                <ul id="main-menu">
-                    <li><a href="index.html">Home</a></li>
-                    
-                    <!-- Topics Dropdown Menu -->
-                    <li id="dropdown">
-                        <a href="#">Topics <i class="fas fa-caret-down" aria-hidden="true"></i></a>
-                        <ul id="dropdown-content">
-                            <li><a href="overview.html">Overview</a></li>
-                            <li><a href="controversies.html">Controversies</a></li>
-                        </ul>
-                    </li>
-                    <!-- End of Topics Dropdown Menu -->
-
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="concepts.html">Concepts</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </nav>
+        <div id="navbar"></div>
+            <script>
+                fetch('navbar.html')
+                    .then(response => response.text())
+                    .then(data => document.getElementById('navbar').innerHTML = data);
+            </script>
             <!-- End of Navigation Bar -->
-            <h1>Topic: Controversies</h1>
-            <p>There are a ton of controversies surrounding GitHub Copilot, and whether it can hinder a developer's skills. Some people believe that it eventually will lead to AIs essentially building our websites for us, with web developers really putting forth almost no effort at all. However, others argue that it can help web developers complete mundane and repetitive tasks quicker, so that they can focus more on things that really need to be worked on and solved.</p>
+            <div id="main-content">
+                <h1 class="main-content">Controversies</h1>
+                <p class="main-content">There are a ton of controversies surrounding GitHub Copilot, and whether it can hinder a developer's skills. Some people believe that it eventually will lead to AIs essentially building our websites for us, with web developers really putting forth almost no effort at all. However, others argue that it can help web developers complete mundane and repetitive tasks quicker, so that they can focus more on things that really need to be worked on and solved.</p>
+            </div>
         </body>
         <footer>
             <p>This website is a class project, and <a href="https://ksuweb.github.io/IT3203/">this is the link to the class website</a>.</p>

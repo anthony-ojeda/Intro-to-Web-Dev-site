@@ -5,7 +5,7 @@ nav {
     overflow: visible;
     margin: 0;
     padding: 0;
-    border: 2px solid white;
+    border: 1px solid white;
     border-radius: 12px;
 }
 
@@ -68,14 +68,48 @@ nav a:hover {
 
 body {
     font-family: Aptos, Arial, sans-serif;
-    background-color: #8d8d8d;
+    background-color: #0e0e0e;
+    margin: 0;
+    color: white;
 }
 
-#main-content {
+.main-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    list-style-type: none;
     text-align: center;
+    color: white;
+    padding: 5px 5px 5px 5px
+}
+
+table caption {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+table.main-content {
+    display: table;
+    width: 500px;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    color: white;
+    text-align: left;
+}
+
+table.main-content th,
+table.main-content td {
+    border: 1px solid #444;
+    padding: 0.75rem 1rem;
+    vertical-align: top;
+}
+
+table.main-content th {
+    background-color: #111;
+}
+
+img.main-content {
+    padding: 10px 0px 10px 350px;
 }
 
 #about-description {
@@ -87,4 +121,55 @@ footer {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    color: white;
+}
+
+a {
+    color:rgb(0, 110, 255);
+}
+
+#concepts-list {
+    text-align: left;
+    padding: 0px 0px 0px 350px;
+}
+
+#quiz-form {
+    display: flexbox;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 10px 0px 10px 0px;
+    margin: 0 auto;
+    border: 2px solid white;
+    border-radius: 12px;
+    width: 600px
+
+}
+
+#quiz-timer {
+    color: #ffd166;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+#quiz-results {
+    width: min(600px, calc(100% - 2rem));
+    box-sizing: border-box;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.quiz-result-pass {
+    background-color: #163d27;
+    border: 2px solid #45c477;
+    color: #b6f2ca;
+}
+
+.quiz-result-fail {
+    background-color: #4a1f24;
+    border: 2px solid #ef6874;
+    color: #ffc2c7;
 }

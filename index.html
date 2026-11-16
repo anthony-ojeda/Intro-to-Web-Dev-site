@@ -9,31 +9,16 @@
         </head>
         <body>
             <!-- Navigation Bar -->
-            <nav>
-                <ul id="main-menu">
-                    <li><a href="index.html">Home</a></li>
-                    
-                    <!-- Topics Dropdown Menu -->
-                    <li id="dropdown">
-                        <a href="#">Topics <i class="fas fa-caret-down" aria-hidden="true"></i></a>
-                        <ul id="dropdown-content">
-                            <li><a href="overview.html">Overview</a></li>
-                            <li><a href="controversies.html">Controversies</a></li>
-                        </ul>
-                    </li>
-                    <!-- End of Topics Dropdown Menu -->
-
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="concepts.html">Concepts</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </nav>
+        <div id="navbar"></div>
+            <script>
+                fetch('navbar.html')
+                    .then(response => response.text())
+                    .then(data => document.getElementById('navbar').innerHTML = data);
+            </script>
             <!-- End of Navigation Bar -->
-            <main id="main-content">
-                <h1>Welcome to Anthony Ojeda's project website and repository for IT 3203.</h1>
-                <p>This paragraph tag will contain a brief intro of the contents of the website in the future.</p>
-                <img src="https://cdn6.f-cdn.com/files/download/82615852/web-dev-ty.jpg?image-optimizer=force&format=webply&width=967" alt="Web Dev image" class="center">
-            </main>
+                <h1 class="main-content">Welcome to Anthony Ojeda's project website and repository for IT 3203.</h1>
+                <p class="main-content">This website will delve into the AI programming development tool known as GitHub Copilot, as well as its applications and controversies.</p>
+                <img src="https://external-preview.redd.it/github-copilot-is-getting-worse-v0-R43kJiA4HczWEfcwJa_6P44XkMvFZzJxSkx6bWVD2w0.png?auto=webp&s=f1f2d1bccaa54c3e6c2db5600ae916d30a3f9ab0" alt="GitHub Copilot logo" class="main-content">
         </body>
         <footer>
             <p>This website is a class project, and <a href="https://ksuweb.github.io/IT3203/">this is the link to the class website</a>.</p>

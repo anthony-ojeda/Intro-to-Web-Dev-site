@@ -9,31 +9,23 @@
         </head>
         <body>
             <!-- Navigation Bar -->
-            <nav>
-                <ul id="main-menu">
-                    <li><a href="index.html">Home</a></li>
-                    
-                    <!-- Topics Dropdown Menu -->
-                    <li id="dropdown">
-                        <a href="#">Topics <i class="fas fa-caret-down" aria-hidden="true"></i></a>
-                        <ul id="dropdown-content">
-                            <li><a href="overview.html">Overview</a></li>
-                            <li><a href="controversies.html">Controversies</a></li>
-                        </ul>
-                    </li>
-                    <!-- End of Topics Dropdown Menu -->
-
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="concepts.html">Concepts</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </nav>
+        <div id="navbar"></div>
+            <script>
+                fetch('navbar.html')
+                    .then(response => response.text())
+                    .then(data => document.getElementById('navbar').innerHTML = data);
+            </script>
             <!-- End of Navigation Bar -->
-            <h1>Key Concepts</h1>
-            <ul>
-                <li>Concept 1</li>
-                <li>Concept 2</li>
-            </ul>
+                <h1 class="main-content">Key Concepts</h1>
+                <ul id="concepts-list" class="main-content">
+                    <li><b>Microsoft</b> - One of the five "big tech" companies, alongside others such as Google and Meta.</li>
+                    <li><b>GitHub</b> - An online service to help developers publish code, as well as do things such as deploy websites.</li>
+                    <li><b>Artificial Intelligence (AI)</b> - The capability of computers to think and learn like human beings.</li>
+                    <li><b>Github Copilot</b> - An AI development tool that can edit and generate code and is meant to assist programmers and developers when coding.</li>
+                    <li><b>Academic Dishonesty / Cheating</b> - The unethical practice of getting some form of outside assistance when doing an assignment or assessment in an academic environment.</li>
+                    <li><b></b></li>
+                    <li><b></b></li>
+                </ul>
         </body>
         <footer>
             <p>This website is a class project, and <a href="https://ksuweb.github.io/IT3203/">this is the link to the class website</a>.</p>
